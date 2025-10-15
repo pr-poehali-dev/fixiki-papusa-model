@@ -12,37 +12,43 @@ const Index = () => {
       name: 'Pure Vanilla Cookie', 
       tier: 'S', 
       role: 'Healer',
-      emoji: '🍦'
+      emoji: '🍦',
+      image: 'https://cdn.poehali.dev/projects/3d5fbe2a-293c-4aae-8f85-9e15575567da/files/ee1c15e5-9e83-4b0e-aa7e-62a65768e070.jpg'
     },
     { 
       name: 'Dark Cacao Cookie', 
       tier: 'S', 
       role: 'Tank',
-      emoji: '🍫'
+      emoji: '🍫',
+      image: 'https://cdn.poehali.dev/projects/3d5fbe2a-293c-4aae-8f85-9e15575567da/files/2eef92f6-aa8a-4477-929c-06002da12067.jpg'
     },
     { 
       name: 'Golden Cheese Cookie', 
       tier: 'S', 
       role: 'DPS',
-      emoji: '🧀'
+      emoji: '🧀',
+      image: 'https://cdn.poehali.dev/projects/3d5fbe2a-293c-4aae-8f85-9e15575567da/files/b406fc08-e115-4edc-bfe4-b81a50228b4a.jpg'
     },
     { 
       name: 'White Lily Cookie', 
       tier: 'A', 
       role: 'Support',
-      emoji: '🌸'
+      emoji: '🌸',
+      image: ''
     },
     { 
       name: 'Hollyberry Cookie', 
       tier: 'A', 
       role: 'Tank',
-      emoji: '🫐'
+      emoji: '🫐',
+      image: ''
     },
     { 
       name: 'Frost Queen Cookie', 
       tier: 'A', 
       role: 'DPS',
-      emoji: '❄️'
+      emoji: '❄️',
+      image: ''
     },
   ];
 
@@ -166,20 +172,37 @@ const Index = () => {
               {metaCharacters.map((character, index) => (
                 <Card 
                   key={index}
-                  className="p-6 bg-card/50 backdrop-blur border-2 hover:scale-105 transition-all cursor-pointer relative overflow-hidden group"
+                  className="p-0 bg-card/50 backdrop-blur border-2 hover:scale-105 transition-all cursor-pointer relative overflow-hidden group"
                   style={{
                     borderColor: character.tier === 'S' ? 'rgba(250, 204, 21, 0.5)' : 'rgba(168, 85, 247, 0.5)'
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   
-                  <div className="relative z-10">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="text-5xl">{character.emoji}</div>
-                      <Badge className={`${getTierColor(character.tier)} font-orbitron text-lg px-3 py-1`}>
-                        {character.tier}
-                      </Badge>
+                  {character.image && (
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={character.image} 
+                        alt={character.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute top-3 right-3">
+                        <Badge className={`${getTierColor(character.tier)} font-orbitron text-lg px-3 py-1`}>
+                          {character.tier}
+                        </Badge>
+                      </div>
                     </div>
+                  )}
+                  
+                  <div className="relative z-10 p-6">
+                    {!character.image && (
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="text-5xl">{character.emoji}</div>
+                        <Badge className={`${getTierColor(character.tier)} font-orbitron text-lg px-3 py-1`}>
+                          {character.tier}
+                        </Badge>
+                      </div>
+                    )}
                     
                     <h3 className="text-xl font-orbitron font-bold mb-2">{character.name}</h3>
                     <p className="text-muted-foreground">{character.role}</p>
